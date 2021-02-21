@@ -1,12 +1,32 @@
 package dev.danielmarcl.personapi.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import dev.danielmarcl.personapi.model.Person;
+import dev.danielmarcl.personapi.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/person")
 public class PersonController {
-    @GetMapping("api/v1/person")
-    public static String getPerson() {
-        return "Person Controller :: OK";
+
+    private PersonService personService;
+
+    @Autowired
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+
+    @GetMapping
+    public List<Person> getPerson() {
+        return personService.getPersons();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Person postPerson(@RequestBody Person person) {
+        return personService.savePerson(person);
     }
 }
