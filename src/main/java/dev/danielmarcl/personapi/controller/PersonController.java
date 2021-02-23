@@ -1,11 +1,13 @@
 package dev.danielmarcl.personapi.controller;
 
+import dev.danielmarcl.personapi.dto.PersonDTO;
 import dev.danielmarcl.personapi.model.Person;
 import dev.danielmarcl.personapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,13 +22,13 @@ public class PersonController {
     }
 
     @GetMapping
-    public List<Person> getPerson() {
+    public List<PersonDTO> getPerson() {
         return personService.getPersons();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Person postPerson(@RequestBody Person person) {
-        return personService.savePerson(person);
+    public Person postPerson(@RequestBody @Valid PersonDTO personDTO) {
+        return personService.savePerson(personDTO);
     }
 }
