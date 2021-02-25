@@ -4,7 +4,6 @@ import dev.danielmarcl.personapi.dto.PersonDTO;
 import dev.danielmarcl.personapi.model.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

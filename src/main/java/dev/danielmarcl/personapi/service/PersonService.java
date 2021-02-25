@@ -1,6 +1,7 @@
 package dev.danielmarcl.personapi.service;
 
 import dev.danielmarcl.personapi.dto.PersonDTO;
+import dev.danielmarcl.personapi.exceptions.PersonNotFoundException;
 import dev.danielmarcl.personapi.mappers.PersonMapper;
 import dev.danielmarcl.personapi.model.Person;
 import dev.danielmarcl.personapi.repository.PersonRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,5 +37,12 @@ public class PersonService {
         Person savedPerson = this.personRepository.save(personToSave);
 
         return savedPerson;
+    }
+
+    public PersonDTO getPersonsById(Long id) throws PersonNotFoundException {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+
+        return personMapper.toDTO(person);
     }
 }
