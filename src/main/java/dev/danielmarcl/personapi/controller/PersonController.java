@@ -1,6 +1,7 @@
 package dev.danielmarcl.personapi.controller;
 
 import dev.danielmarcl.personapi.dto.PersonDTO;
+import dev.danielmarcl.personapi.exceptions.PersonNotFoundException;
 import dev.danielmarcl.personapi.model.Person;
 import dev.danielmarcl.personapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> getPerson() {
         return personService.getPersons();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO getPersonById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.getPersonsById(id);
     }
 
     @PostMapping
