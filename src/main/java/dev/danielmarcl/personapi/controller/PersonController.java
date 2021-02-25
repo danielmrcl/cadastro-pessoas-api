@@ -37,4 +37,10 @@ public class PersonController {
     public Person postPerson(@RequestBody @Valid PersonDTO personDTO) {
         return personService.savePerson(personDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePerson(@PathVariable Long id) throws PersonNotFoundException {
+        personService.deletePerson(id);
+    }
 }
