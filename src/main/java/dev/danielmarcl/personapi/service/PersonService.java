@@ -51,7 +51,13 @@ public class PersonService {
         personRepository.delete(person);
     }
 
-    public Person verifyIfExists(Long id) throws PersonNotFoundException {
+    public Person updatePerson(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExists(id);
+
+        return savePerson(personDTO);
+    }
+
+    private Person verifyIfExists(Long id) throws PersonNotFoundException {
         return personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
