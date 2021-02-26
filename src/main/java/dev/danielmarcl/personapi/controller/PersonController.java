@@ -37,4 +37,15 @@ public class PersonController {
     public Person postPerson(@RequestBody @Valid PersonDTO personDTO) {
         return personService.savePerson(personDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePerson(@PathVariable Long id) throws PersonNotFoundException {
+        personService.deletePerson(id);
+    }
+
+    @PutMapping("/{id}")
+    public Person updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.updatePerson(id, personDTO);
+    }
 }
