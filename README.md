@@ -31,11 +31,11 @@ Para utilizar o projeto via nuvem, basta utilizar um software Rest API Client, c
 https://dio-restapi-cadastropessoas.herokuapp.com/api/v1/person
 ```
 ---
-##Exemplos de uso:
+## Exemplos de uso:
 
-###Cadastrar uma pessoa:
+### Cadastrar uma pessoa:
 Método: `POST`  
-Endereço: `[host]/api/v1/person/`
+Endereço: `[host]/api/v1/person/`  
 ```json
 {
 	"firstName":"Nome",
@@ -55,30 +55,30 @@ Endereço: `[host]/api/v1/person/`
 }
 ```
 
-###Listar todas as pessoas cadastradas:  
+### Listar todas as pessoas cadastradas:  
 Método: `GET`  
 Endereço: `[host]/api/v1/person`  
 ```json
 // Corpo json: vazio
 ```
 
-###Procurar pessoa cadastrada por ID:  
+### Procurar pessoa cadastrada por ID:  
 Método: `GET`  
 Endereço: `[host]/api/v1/person/[id]`  
 ```json
 // Corpo json: vazio
 ```
 
-###Deletar uma pessoa por ID:
+### Deletar uma pessoa por ID:  
 Método: `DELETE`  
 Endereço: `[host]/api/v1/person/[id]`  
 ```json
 // Corpo json: vazio
 ```
 
-###Atualizar uma pessoa:
+### Atualizar uma pessoa:  
 Método: `PUT`  
-Endereço: `[host]/api/v1/person/[id]`
+Endereço: `[host]/api/v1/person/[id]`  
 ```json
 {
   "id": 1, // especificar id da pessoa
