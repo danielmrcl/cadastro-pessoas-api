@@ -1,6 +1,6 @@
 <h2>Digital Innovation: Desenvolvendo um sistema de gerenciamento de pessoas em API REST com Spring Boot</h2>
 
-Este é um código escrito por mim ([Daniel Marcelo](https://web.digitalinnovation.one/users/danielmarcelo_junior)) durante uma live coding realizado pelo professor - no bootcamp de [Java Developer](https://web.digitalinnovation.one/track/java-developer) da [Digital Innovation One](https://digitalinnovation.one).
+Este é um código escrito por mim ([Daniel Marcelo](https://web.digitalinnovation.one/users/danielmarcelo_junior)) durante uma live coding realizado pelo professor [Rodrigo Peleias](https://www.linkedin.com/in/rodrigopeleias/) no bootcamp de [Java Developer](https://web.digitalinnovation.one/track/java-developer) da [Digital Innovation One](https://digitalinnovation.one).
 
 Nesta live coding desenvolvemos um pequeno sistema para o gerenciamento de pessoas de uma empresa através de uma API REST, criada com o Spring Boot.
 
@@ -25,7 +25,7 @@ Após executar o comando acima, basta apenas abrir o seguinte endereço e visual
 http://localhost:8080/api/v1/person
 ```
 
-Para utilizar o projeto via nuvem, basta utilizar um software Rest API Client, como o PostMan. E encaminhar requisições `GET`, `POST` ou `PUT` para o endereço:
+Ou para utilizar o projeto via nuvem, basta utilizar um software Rest API Client, como o PostMan. E encaminhar requisições `GET`, `POST`, `DELETE` ou `PUT` para o endereço:
 
 ```
 https://dio-restapi-cadastropessoas.herokuapp.com/api/v1/person
