@@ -69,6 +69,13 @@ Endereço: `[host]/api/v1/person/[id]`
 // Corpo json: vazio
 ```
 
+###Deletar uma pessoa por ID:
+Método: `DELETE`  
+Endereço: `[host]/api/v1/person/[id]`  
+```json
+// Corpo json: vazio
+```
+
 ###Atualizar uma pessoa:
 Método: `PUT`  
 Endereço: `[host]/api/v1/person/[id]`
