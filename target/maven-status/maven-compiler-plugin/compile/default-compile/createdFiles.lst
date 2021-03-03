@@ -1,0 +1,16 @@
+dev/danielmarcl/personapi/dto/PhoneDTO$PhoneDTOBuilder.class
+dev/danielmarcl/personapi/exceptions/PersonNotFoundException.class
+dev/danielmarcl/personapi/repository/PersonRepository.class
+dev/danielmarcl/personapi/controller/PersonController.class
+dev/danielmarcl/personapi/model/Phone$PhoneBuilder.class
+dev/danielmarcl/personapi/model/Phone.class
+dev/danielmarcl/personapi/enums/PhoneType.class
+dev/danielmarcl/personapi/PersonApiApplication.class
+dev/danielmarcl/personapi/dto/PhoneDTO.class
+dev/danielmarcl/personapi/mappers/PersonMapperImpl.class
+dev/danielmarcl/personapi/service/PersonService.class
+dev/danielmarcl/personapi/dto/PersonDTO$PersonDTOBuilder.class
+dev/danielmarcl/personapi/model/Person$PersonBuilder.class
+dev/danielmarcl/personapi/model/Person.class
+dev/danielmarcl/personapi/mappers/PersonMapper.class
+dev/danielmarcl/personapi/dto/PersonDTO.class
