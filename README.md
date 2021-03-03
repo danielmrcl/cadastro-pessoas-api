@@ -1,3 +1,7 @@
+
+[![Build and deploy WAR app to Azure Web App - dio-meetapp](https://github.com/danielmrcl/dio-restApi-cadastroPessoas/actions/workflows/dev_dio-meetapp.yml/badge.svg)](https://github.com/danielmrcl/dio-restApi-cadastroPessoas/actions/workflows/dev_dio-meetapp.yml)
+
+---
 <h2>Digital Innovation: Desenvolvendo um sistema de gerenciamento de pessoas em API REST com Spring Boot</h2>
 
 Este é um código escrito por mim ([Daniel Marcelo](https://web.digitalinnovation.one/users/danielmarcelo_junior)) durante uma live coding realizado pelo professor [Rodrigo Peleias](https://www.linkedin.com/in/rodrigopeleias/) no bootcamp de [Java Developer](https://web.digitalinnovation.one/track/java-developer) da [Digital Innovation One](https://digitalinnovation.one).
