@@ -1,31 +1,48 @@
 package dev.danielmarcl.personapi.service;
 
+import dev.danielmarcl.personapi.builder.PersonDTOBuilder;
 import dev.danielmarcl.personapi.dto.PersonDTO;
+import dev.danielmarcl.personapi.exceptions.PersonNotFoundException;
+import dev.danielmarcl.personapi.mappers.PersonMapper;
 import dev.danielmarcl.personapi.model.Person;
 import dev.danielmarcl.personapi.repository.PersonRepository;
-import dev.danielmarcl.personapi.utils.PersonUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PersonServiceTest {
     @Mock
     private PersonRepository personRepository;
+
+    private final PersonMapper personMapper = PersonMapper.INSTANCE;
+
     @InjectMocks
     private PersonService personService;
 
     @Test
     void testWhenPersonDTOThenReturnSavedPerson() {
-        PersonDTO personDTO = PersonUtils.createFakeDTO();
-        Person person = PersonUtils.createFakeEntity();
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+        Person expectedPersonSaved = personMapper.toModel(personDTO);
 
-        Mockito.when(personRepository.save(Mockito.any(Person.class))).thenReturn(person);
+        /* When */
+        when(personRepository.save(expectedPersonSaved)).thenReturn(expectedPersonSaved);
 
-        Assertions.assertEquals(person, personService.savePerson(personDTO));
+        /* Then */
+        personService.savePerson(personDTO);
+
+        /* Hamcrest asserts */
+        assertThat(expectedPersonSaved.getId(), is(equalTo(personDTO.getId())));
+        assertThat(expectedPersonSaved.getCpf(), is(equalTo(personDTO.getCpf())));
     }
 }

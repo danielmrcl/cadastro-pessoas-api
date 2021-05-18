@@ -12,8 +12,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-03-03T02:35:33-0300",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.9.1 (Debian)"
+    date = "2021-05-18T20:38:37-0300",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.11 (Oracle Corporation)"
 )
 public class PersonMapperImpl implements PersonMapper {
 

@@ -27,15 +27,14 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
-    public Person savePerson(PersonDTO personDTO) {
-
+    public PersonDTO savePerson(PersonDTO personDTO) {
         Person personToSave = personMapper.toModel(personDTO);
         Person savedPerson = this.personRepository.save(personToSave);
 
-        return savedPerson;
+        return personMapper.toDTO(savedPerson);
     }
 
-    public PersonDTO getPersonsById(Long id) throws PersonNotFoundException {
+    public PersonDTO getPersonById(Long id) throws PersonNotFoundException {
         Person person = verifyIfExists(id);
 
         return personMapper.toDTO(person);
@@ -47,7 +46,7 @@ public class PersonService {
         personRepository.delete(person);
     }
 
-    public Person updatePerson(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+    public PersonDTO updatePerson(Long id, PersonDTO personDTO) throws PersonNotFoundException {
         verifyIfExists(id);
 
         return savePerson(personDTO);
