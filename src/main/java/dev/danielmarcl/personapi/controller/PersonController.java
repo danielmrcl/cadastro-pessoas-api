@@ -26,12 +26,12 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public PersonDTO getPersonById(@PathVariable Long id) throws PersonNotFoundException {
-        return personService.getPersonsById(id);
+        return personService.getPersonById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Person postPerson(@RequestBody @Valid PersonDTO personDTO) {
+    public PersonDTO postPerson(@RequestBody @Valid PersonDTO personDTO) {
         return personService.savePerson(personDTO);
     }
 
@@ -42,7 +42,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public Person updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
+    public PersonDTO updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
         return personService.updatePerson(id, personDTO);
     }
 }
