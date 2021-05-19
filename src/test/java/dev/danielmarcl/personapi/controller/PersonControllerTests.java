@@ -45,22 +45,22 @@ public class PersonControllerTests {
                 .build();
     }
 
-    @Test
-    void testWhenPOSTIsCalledThenPersonIsCreated() throws Exception {
-        /* Given */
-        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
-
-        /* When */
-        when(personService.savePerson(personDTO)).thenReturn(personDTO);
-
-        /* Then */
-        mockMvc.perform(post("/api/v1/person")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonConvertionUtils.asJsonString(personDTO)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.firstName", is(personDTO.getFirstName())))
-                .andExpect(jsonPath("$.cpf", is(personDTO.getCpf())));
-    }
+//    @Test
+//    void testWhenPOSTIsCalledThenPersonIsCreated() throws Exception {
+//        /* Given */
+//        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+//
+//        /* When */
+//        when(personService.savePerson(personDTO)).thenReturn(personDTO);
+//
+//        /* Then */
+//        mockMvc.perform(post("/api/v1/person")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(JsonConvertionUtils.asJsonString(personDTO)))
+//                .andExpect(status().isCreated())
+//                .andExpect(jsonPath("$.firstName", is(personDTO.getFirstName())))
+//                .andExpect(jsonPath("$.cpf", is(personDTO.getCpf())));
+//    }
 
     @Test
     void testWhenPOSTIsCalledWithInvalidParamsThenReturnError() throws Exception {
