@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -71,5 +73,33 @@ public class PersonServiceTest {
 
         /* Then */
         assertThrows(PersonNotFoundException.class, () -> personService.getPersonById(personDTO.getId()));
+    }
+
+    @Test
+    void testWhenGetPersonsListReturnPersonList() {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+        Person expectedPerson = personMapper.toModel(personDTO);
+
+        /* When */
+        when(personRepository.findAll()).thenReturn(Collections.singletonList(expectedPerson));
+
+        /* Then */
+        List<PersonDTO> foundListPersonDTO = personService.getPersons();
+        assertThat(foundListPersonDTO, is(not(empty())));
+        assertThat(foundListPersonDTO.get(0), is(equalTo(personDTO)));
+    }
+
+    @Test
+    void testWhenGetPersonsListReturnEmptyList() {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        /* When */
+        when(personRepository.findAll()).thenReturn(Collections.emptyList());
+
+        /* Then */
+        List<PersonDTO> foundListPersonDTO = personService.getPersons();
+        assertThat(foundListPersonDTO, is(empty()));
     }
 }

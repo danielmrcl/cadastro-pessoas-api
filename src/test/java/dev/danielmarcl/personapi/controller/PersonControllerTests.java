@@ -17,6 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.util.Collections;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -99,5 +103,21 @@ public class PersonControllerTests {
         mockMvc.perform(get("/api/v1/person" + "/" + personDTO.getId())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testWhenGETPersonsListReturnOkStatus() throws Exception {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        /* When */
+        when(personService.getPersons()).thenReturn(Collections.singletonList(personDTO));
+
+        /* Then */
+        mockMvc.perform(get("/api/v1/person")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].firstName", is(personDTO.getFirstName())))
+                .andExpect(jsonPath("$[0].cpf", is(personDTO.getCpf())));
     }
 }
