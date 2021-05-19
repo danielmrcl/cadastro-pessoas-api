@@ -2,6 +2,7 @@ package dev.danielmarcl.personapi.controller;
 
 import dev.danielmarcl.personapi.builder.PersonDTOBuilder;
 import dev.danielmarcl.personapi.dto.PersonDTO;
+import dev.danielmarcl.personapi.exceptions.PersonNotFoundException;
 import dev.danielmarcl.personapi.service.PersonService;
 import dev.danielmarcl.personapi.utils.JsonConvertionUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,5 +69,35 @@ public class PersonControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonConvertionUtils.asJsonString(personDTO)))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testWhenGETIsCalledWithValidIdThenReturnPersonById() throws Exception {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        /* When */
+        when(personService.getPersonById(personDTO.getId())).thenReturn(personDTO);
+
+        /* Then */
+        mockMvc.perform(get("/api/v1/person" + "/" + personDTO.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName", is(personDTO.getFirstName())))
+                .andExpect(jsonPath("$.cpf", is(personDTO.getCpf())));
+    }
+
+    @Test
+    void testWhenGETIsCalledWithNotValidIdThenReturnNotFoundStatus() throws Exception {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        /* When */
+        when(personService.getPersonById(personDTO.getId())).thenThrow(PersonNotFoundException.class);
+
+        /* Then */
+        mockMvc.perform(get("/api/v1/person" + "/" + personDTO.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

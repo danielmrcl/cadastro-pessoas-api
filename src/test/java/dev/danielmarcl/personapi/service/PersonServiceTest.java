@@ -45,4 +45,31 @@ public class PersonServiceTest {
         assertThat(expectedPersonSaved.getId(), is(equalTo(personDTO.getId())));
         assertThat(expectedPersonSaved.getCpf(), is(equalTo(personDTO.getCpf())));
     }
+
+    @Test
+    void testWhenPersonIdExistsThenReturnPersonById() throws PersonNotFoundException {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+        Person expectedPersonSaved = personMapper.toModel(personDTO);
+
+        /* When */
+        when(personRepository.findById(personDTO.getId())).thenReturn(Optional.of(expectedPersonSaved));
+
+        /* Then */
+        personService.getPersonById(personDTO.getId());
+
+        assertThat(expectedPersonSaved.getId(), is(equalTo(personDTO.getId())));
+    }
+
+    @Test
+    void testWhenPersonIdNotExistsThenThrownNotFoundException() {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        /* When */
+        when(personRepository.findById(personDTO.getId())).thenReturn(Optional.empty());
+
+        /* Then */
+        assertThrows(PersonNotFoundException.class, () -> personService.getPersonById(personDTO.getId()));
+    }
 }
