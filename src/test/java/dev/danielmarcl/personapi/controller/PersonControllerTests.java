@@ -120,4 +120,25 @@ public class PersonControllerTests {
                 .andExpect(jsonPath("$[0].firstName", is(personDTO.getFirstName())))
                 .andExpect(jsonPath("$[0].cpf", is(personDTO.getCpf())));
     }
+
+    @Test
+    void testWhenDELETEPersonWithValidIdThenReturnNoContentStatus() throws Exception {
+        /* Given */
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+
+        doNothing().when(personService).deletePerson(personDTO.getId());
+
+        mockMvc.perform(delete("/api/v1/person" + "/" + personDTO.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void testWhenDELETEPersonWithInvalidIdThenReturnNoContentStatus() throws Exception {
+        doThrow(PersonNotFoundException.class).when(personService).deletePerson(0L);
+
+        mockMvc.perform(delete("/api/v1/person" + "/" + 0L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
 }

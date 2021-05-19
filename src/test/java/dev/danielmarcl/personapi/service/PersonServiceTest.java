@@ -102,4 +102,18 @@ public class PersonServiceTest {
         List<PersonDTO> foundListPersonDTO = personService.getPersons();
         assertThat(foundListPersonDTO, is(empty()));
     }
+
+    @Test
+    void testWhenDeletePersonWithValidIdThenDeletePerson() throws PersonNotFoundException {
+        PersonDTO personDTO = PersonDTOBuilder.builder().build().toPersonDTO();
+        Person expectedPerson = personMapper.toModel(personDTO);
+
+        when(personRepository.findById(personDTO.getId())).thenReturn(Optional.of(expectedPerson));
+        doNothing().when(personRepository).delete(expectedPerson);
+
+        personService.deletePerson(personDTO.getId());
+
+        verify(personRepository, times(1)).findById(personDTO.getId());
+        verify(personRepository, times(1)).delete(expectedPerson);
+    }
 }
